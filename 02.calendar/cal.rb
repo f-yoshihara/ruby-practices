@@ -1,8 +1,9 @@
 #!/usr/bin/env ruby
 
+require 'optparse'
 require 'date'
 
-def print_header(year=0, month=0)
+def print_header(year = 0, month = 0)
   puts "      #{month}月 #{year}\n日 月 火 水 木 金 土"
 end
 
@@ -34,8 +35,13 @@ def print_body(year, month)
   end
 end
 
-year = 2021
-month = 2
+options = ARGV.getopts('y:m:')
+
+year  = options['y'].to_i
+year  = Date.today.year if year == 0
+
+month = options['m'].to_i
+month = Date.today.month if month == 0 || month < 1 || month > 12
 
 print_header(year, month)
 print_body(year, month)
