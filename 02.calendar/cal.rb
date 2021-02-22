@@ -11,14 +11,22 @@ def weeks(year, month)
   weeks = []
   i = 0
   [*1..Date.new(year, month, -1).day].each do |day|
-    wday = Date.new(year, month, day).wday
+    date = Date.new(year, month, day)
+    wday = date.wday
     if day == 1
       weeks[i] = Array.new(7, '  ')
     elsif wday == 0
       i += 1
       weeks[i] = Array.new(7, '  ')
     end
-    weeks[i][wday] = day < 10 ? " " + day.to_s : day.to_s
+    str_day = day.to_s
+    if day < 10
+      str_day = " " + str_day
+    end
+    if date == Date.today
+      str_day = "\e[7m#{str_day}\e[0m"
+    end
+    weeks[i][wday] = str_day
   end
   weeks
 end
