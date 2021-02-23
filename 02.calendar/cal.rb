@@ -7,16 +7,22 @@ def print_header(year = 0, month = 0)
   puts "      #{month}月 #{year}\n日 月 火 水 木 金 土"
 end
 
+def day_to_string(int)
+
+end
+
 def weeks(year, month)
   weeks = []
   i = 0
   [*1..Date.new(year, month, -1).day].each do |day|
     date = Date.new(year, month, day)
     wday = date.wday
-    if day == 1
-      weeks[i] = Array.new(7, '  ')
-    elsif wday == 0
+    is_start_of_week = wday == 0
+    is_start_of_month = day == 1
+    if is_start_of_week && ! is_start_of_month
       i += 1
+    end
+    if is_start_of_week || is_start_of_month
       weeks[i] = Array.new(7, '  ')
     end
     str_day = day.to_s
