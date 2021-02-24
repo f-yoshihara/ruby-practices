@@ -3,15 +3,13 @@
 require 'optparse'
 require 'date'
 
-def print_header(year = 0, month = 0)
+# カレンダーのヘッダーを出力する
+def puts_header(year = 0, month = 0)
   puts "      #{month}月 #{year}\n日 月 火 水 木 金 土"
 end
 
-def day_to_string(int)
-
-end
-
-def weeks(year, month)
+# カレンダーの週を配列で取得する
+def get_weeks(year, month)
   weeks = []
   i = 0
   [*1..Date.new(year, month, -1).day].each do |day|
@@ -37,14 +35,16 @@ def weeks(year, month)
   weeks
 end
 
-def lines(year, month)
-  weeks(year, month).map do |week|
+# カレンダーのボディの各行の内容を取得する
+def get_body_lines(year, month)
+  get_weeks(year, month).map do |week|
     week.join(' ')
   end
 end
 
-def print_body(year, month)
-  lines(year, month).each do |line|
+# カレンダーのボディを出力する
+def puts_body(year, month)
+  get_body_lines(year, month).each do |line|
     puts line
   end
 end
@@ -57,5 +57,5 @@ year  = Date.today.year if year == 0
 month = options['m'].to_i
 month = Date.today.month if month == 0 || month < 1 || month > 12
 
-print_header(year, month)
-print_body(year, month)
+puts_header(year, month)
+puts_body(year, month)
