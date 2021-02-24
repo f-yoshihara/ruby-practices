@@ -1,7 +1,6 @@
 #!/usr/bin/env ruby
 
-100.times do |i|
-  i += 1
+(1..100).each do |i|
   if i % 15 == 0
     puts 'FizzBuzz'
   elsif i % 5 == 0
